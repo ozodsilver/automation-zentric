@@ -3,7 +3,7 @@ import {onMounted, onUnmounted} from 'vue';
 
 const handleScroll = () => {
   const content = document.querySelector('.our-product__content');
-  if (content) {
+  if (content && content instanceof HTMLElement) {
     const scrollPosition = window.scrollY;
     content.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
   }

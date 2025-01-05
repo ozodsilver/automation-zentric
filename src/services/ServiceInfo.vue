@@ -1,21 +1,24 @@
 <script setup lang="ts">
 import {computed, onMounted, onUnmounted} from "vue";
-import type {Service} from "@/types/Service.ts";
+import type {Service, Technologies} from "@/types/Service.ts";
 
 const {service, reverse} = defineProps<{
   service: Service;
   reverse: boolean;
 }>();
 
-const technologies = computed(() => service.technologies)
+const technologies = computed<Technologies[]>(() => service.technologies)
 
 const handleScroll = () => {
   const sections = document.querySelectorAll(".technologies");
   sections.forEach((section) => {
-    const scrollPosition = window.scrollY;
-    section.style.backgroundPositionY = `${scrollPosition * 0.6}px`;
+    if (section instanceof HTMLElement) {
+      const scrollPosition = window.scrollY;
+      section.style.backgroundPositionY = `${scrollPosition * 0.6}px`;
+    }
   });
 };
+
 
 
 onMounted(() => {
